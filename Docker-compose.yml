@@ -1,0 +1,66 @@
+services:
+
+  # ── Production (nginx serving built React app) ───────────────
+  portfolio:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    container_name: portfolio_prod
+    ports:
+      - "3000:80"
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+    networks:
+      - portfolio_net
+    volumes:
+      # Named volume: nginx logs persist even if container restarts
+      - nginx_logs:/var/log/nginx
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:80"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  # ── Dev server (Vite hot reload) ─────────────────────────────
+  portfolio-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: portfolio_dev
+    ports:
+      - "5173:5173"
+    volumes:
+      # Bind mounts: changes on host reflect instantly in container
+      - ./src:/app/src
+      - ./public:/app/public
+      - ./index.html:/app/index.html
+      # Named volume: prevents host node_modules from overwriting container's
+      - node_modules:/app/node_modules
+    environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true
+    networks:
+      - portfolio_net
+    profiles:
+      - dev
+
+# ── Named volumes ────────────────────────────────────────────
+# Docker manages these — they persist across container restarts
+volumes:
+  node_modules:
+    driver: local
+  nginx_logs:
+    driver: local
+
+# ── Networks ─────────────────────────────────────────────────
+# Custom bridge network — containers talk to each other by name
+# e.g. when you add a backend: http://portfolio_backend:4000
+networks:
+  portfolio_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16

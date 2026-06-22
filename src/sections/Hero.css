@@ -1,0 +1,123 @@
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-top: 100px;
+  padding-bottom: 80px;
+}
+
+.hero__inner {
+  max-width: 740px;
+}
+
+.hero__tag {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gray-400);
+  margin-bottom: 28px;
+}
+
+.hero__name {
+  font-family: var(--font-serif);
+  font-size: clamp(64px, 10vw, 108px);
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  color: var(--black);
+  margin-bottom: 20px;
+}
+
+.hero__role {
+  font-size: clamp(18px, 3vw, 26px);
+  font-weight: 300;
+  color: var(--gray-500);
+  letter-spacing: -0.01em;
+  margin-bottom: 28px;
+  min-height: 1.4em;
+}
+
+.hero__cursor {
+  display: inline-block;
+  color: var(--black);
+  font-weight: 300;
+  animation: blink 1s step-end infinite;
+  margin-left: 1px;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.hero__bio {
+  font-size: 17px;
+  font-weight: 300;
+  color: var(--gray-500);
+  line-height: 1.75;
+  max-width: 520px;
+  margin-bottom: 44px;
+}
+
+.hero__actions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.hero__btn {
+  font-size: 14px;
+  font-weight: 500;
+  padding: 12px 28px;
+  border-radius: 2px;
+  transition: all 0.2s;
+  letter-spacing: 0.01em;
+}
+
+.hero__btn--primary {
+  background: var(--black);
+  color: var(--white);
+}
+
+.hero__btn--primary:hover {
+  background: var(--gray-700);
+}
+
+.hero__btn--ghost {
+  border: 1px solid var(--gray-200);
+  color: var(--gray-700);
+}
+
+.hero__btn--ghost:hover {
+  border-color: var(--black);
+  color: var(--black);
+}
+
+.hero__scroll-hint {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.hero__scroll-hint span {
+  display: block;
+  width: 1px;
+  height: 48px;
+  background: var(--gray-200);
+  animation: scrollDown 1.8s ease-in-out infinite;
+}
+
+@keyframes scrollDown {
+  0% { transform: scaleY(0); transform-origin: top; opacity: 0; }
+  30% { transform: scaleY(1); transform-origin: top; opacity: 1; }
+  70% { transform: scaleY(1); transform-origin: bottom; opacity: 1; }
+  100% { transform: scaleY(0); transform-origin: bottom; opacity: 0; }
+}
+
+@media (max-width: 768px) {
+  .hero { align-items: flex-start; padding-top: 120px; }
+  .hero__scroll-hint { display: none; }
+}

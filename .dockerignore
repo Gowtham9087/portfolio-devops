@@ -1,0 +1,36 @@
+# Dependencies — never copy these, always install fresh
+node_modules
+npm-debug.log*
+
+# Build output — Stage 2 gets this from Stage 1, not from host
+dist
+
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Environment files — NEVER bake secrets into image
+.env
+.env.*
+.env.local
+.env.production
+
+# Editor files
+.vscode
+.idea
+*.suo
+*.ntvs*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Docs (not needed in image)
+README.md
+*.md
+
+# Test files
+coverage
+*.test.*
+*.spec.*

@@ -1,0 +1,15 @@
+# Dev-only Dockerfile — hot reload, no nginx
+FROM node:18.20.4-alpine3.19
+
+WORKDIR /app
+
+COPY package.json package-lock.json ./
+
+RUN npm ci --frozen-lockfile
+
+COPY . .
+
+EXPOSE 5173
+
+# Vite must listen on 0.0.0.0 to be reachable outside container
+CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]

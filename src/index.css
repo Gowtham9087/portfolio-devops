@@ -1,0 +1,51 @@
+/* ── Google Fonts ── */
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@300;400;500&display=swap');
+
+/* ── Design tokens ── */
+:root {
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-serif: 'EB Garamond', Georgia, serif;
+
+  --black:    #0a0a0a;
+  --white:    #ffffff;
+
+  --gray-50:  #fafafa;
+  --gray-100: #f0f0f0;
+  --gray-200: #e0e0e0;
+  --gray-300: #c0c0c0;
+  --gray-400: #999999;
+  --gray-500: #666666;
+  --gray-600: #444444;
+  --gray-700: #2a2a2a;
+
+  --section-gap: 120px;
+}
+
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-sans);
+  background: var(--white);
+  color: var(--black);
+  -webkit-font-smoothing: antialiased;
+}
+
+a { text-decoration: none; color: inherit; }
+button { cursor: pointer; background: none; border: none; font-family: inherit; }
+ul { list-style: none; }
+
+/* ── Layout ── */
+.container {
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+@media (max-width: 768px) {
+  .container { padding: 0 24px; }
+  :root { --section-gap: 80px; }
+}

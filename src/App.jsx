@@ -6,10 +6,11 @@ import Projects from './sections/Projects'
 import Blog from './sections/Blog'
 import Contact from './sections/Contact'
 import Footer from './components/Footer'
+import * as Sentry from '@sentry/react'
 
 export default function App() {
   return (
-    <>
+    <Sentry.ErrorBoundary fallback={<p>Something went wrong.</p>}>
       <Navbar />
       <main>
         <Hero />
@@ -20,6 +21,6 @@ export default function App() {
         <Contact />
       </main>
       <Footer />
-    </>
+    </Sentry.ErrorBoundary>
   )
 }

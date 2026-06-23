@@ -1,4 +1,4 @@
-import { onCLS, onFID, onLCP, onFCP, onTTFB } from 'web-vitals'
+import { onCLS, onLCP, onFCP, onTTFB, onINP } from 'web-vitals'
 import * as Sentry from '@sentry/react'
 import logger from './logger'
 
@@ -14,7 +14,7 @@ const reportVital = ({ name, value, rating }) => {
 
 export const measureVitals = () => {
   onCLS(reportVital)
-  onFID(reportVital)
+  onINP(reportVital)   // replaces onFID (removed in web-vitals v4)
   onLCP(reportVital)
   onFCP(reportVital)
   onTTFB(reportVital)
